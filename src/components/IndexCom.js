@@ -1,4 +1,4 @@
-import imageFile from "../styles/images/test.png"
+import imageFile from "../styles/images/test.jpg"
 import { StyleContentBlock, StyleContentWrap } from "./common/StyleContent"
 import { ProductContext, ProductImg, ProductList, ProductListBox, ProductName, ProductPrice, ProductTitle } from "./common/StyleProduct"
 

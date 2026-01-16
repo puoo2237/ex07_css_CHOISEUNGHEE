@@ -40,20 +40,25 @@ const LoginBox = styled.div`
         }
     }
 `;
-const LoginCom = () => {
+const LoginCom = ({ login, onSubmit, onChange, loading, error }) => {
     return (<>
-        <AuthBlock>
-            <LoginBox>
-                <div className="logo-area">
-                    <Link to='/'>탱이냥 이동</Link>
-                </div>
-                <StyleForm>
-                    <StyleInput placeholder="input username" />
-                    <StyleInput placeholder="input password" />
-                    <StyleButton width="100%" background={["178,235,244", 0.5]}>로그인</StyleButton>
-                </StyleForm>
-            </LoginBox>
-        </AuthBlock>
+        <AuthBlock> {
+            loading ?
+                <h2>Login...</h2> :
+                error ?
+                    <h2>{error}</h2> :
+                    <LoginBox LoginBox >
+                        <div className="logo-area">
+                            <Link to='/'>탱이냥 이동</Link>
+                        </div>
+                        <StyleForm onSubmit={onSubmit}>
+                            <StyleInput onChange={onChange} name="username" value={login.username} placeholder="input username" />
+                            <StyleInput onChange={onChange} name="password" value={login.password} placeholder="input password" />
+                            <StyleButton width="100%" background={["178,235,244", 0.5]}>로그인</StyleButton>
+                        </StyleForm>
+                    </LoginBox>
+                    }
+        </AuthBlock >
     </>)
 }
 export default LoginCom

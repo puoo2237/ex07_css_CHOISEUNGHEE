@@ -3,7 +3,7 @@ import IndexCom from "../components/IndexCom"
 
 const IndexCon = () => {
     return (<>
-        <HeaderCom />
+        <HeaderCom/>
         <IndexCom />
     </>)
 }
