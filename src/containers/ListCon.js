@@ -10,7 +10,7 @@ const ListCon = () => {
     
     useEffect(() => {
         dispatch(listThunk())
-    }, [data])
+    }, []);
 
     return (<>
         <HeaderCom/>

@@ -19,7 +19,7 @@ function App() {
       <Route path="/login" element={<LoginCon/>}></Route>
       <Route path="/register" element={<RegCon/>}></Route>
       <Route path="/list" element={<ListCon/>}></Route>
-      <Route path="/one/:username" element={<ListOneCon/>}></Route>
+      <Route path="/one/:id" element={<ListOneCon/>}></Route>
     </Routes>
     
     </>

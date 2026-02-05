@@ -8,6 +8,7 @@ import HeaderCom from "../components/common/HeaderCom";
 const RegCon = () => {
     const dispatch = useDispatch();
     const nav = useNavigate();
+    let num = 4;
 
     const { register } = useSelector(state => state.input)
     const { loading, error } = useSelector(state => state.auth)
@@ -23,7 +24,8 @@ const RegCon = () => {
         e.preventDefault();
 
         try {
-            const res = await dispatch(registerThunk(register))
+
+            const res = await dispatch(registerThunk({ ...register, id: num++ }))
             const resRegThunk = res.payload
             if (resRegThunk.success === 0) {
                 nav("/login") // login으로 이동

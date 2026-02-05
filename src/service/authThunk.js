@@ -1,23 +1,27 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
+import { service_path } from "./service_ip_port"
 
-let data_set = [
-    { username: "aaa", password: "aaa", role: "USER" },
-    { username: "bbb", password: "bbb", role: "USER" },
-    { username: "ccc", password: "ccc", role: "USER" },
-]
+// let data_set = [
+//     { username: "aaa", password: "aaa", role: "USER" },
+//     { username: "bbb", password: "bbb", role: "USER" },
+//     { username: "ccc", password: "ccc", role: "USER" },
+// ]
 
+const path = service_path + "/members";
 export const loginThunk = createAsyncThunk(
     "loginThunk",
     async (user) => {
-        const res = data_set.filter(d => user.username === d.username)[0]
-        if (res) {
-            /// username이 있으면
-            return user.password === res.password ?
-                { success: 0, message: "로그인에 성공하였습니다." } :
-                { success: 1, message: "비밀번호가 틀렸습니다." }
+        const loginRes = await fetch(path + "/login", {
+            method: "post",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(user)
+        })
+        if (loginRes.ok) {
+            const res = await loginRes.json();
+            return { success: res, message: "로그인 성공" };
         } else {
-            // username이 없음
-            return { success: 1, message: "username이 없습니다." }
+            const error = await loginRes.text();
+            return { success: 1, message: error };
         }
     }
 )
@@ -25,13 +29,18 @@ export const loginThunk = createAsyncThunk(
 export const registerThunk = createAsyncThunk(
     "registerThunk",
     async (user) => {
-        const res = data_set.filter(d => user.username === d.username)[0]
-        if (res) {
+        const regRes = await fetch(path, {
+            method: "post",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(user)
+        })
+        if (regRes.ok) {
+            const res = await regRes.json();
             // username이 있으면
-            return { success: 1, message: "이미 가입된 회원입니다." }
+            return { success: res, message: "회원가입 성공" };
         } else {
-            data_set = data_set.concat(user)
-            return { success: 0, message: "회원가입이 완료되었습니다." }
+            const error = await regRes.text();
+            return { success: 1, message: error };
         }
     }
 )
@@ -39,37 +48,46 @@ export const registerThunk = createAsyncThunk(
 export const listThunk = createAsyncThunk(
     "listThunk",
     async () => {
-        if (data_set) {
-            // data_set이 존재한다면
-            return { data: data_set, message: "회원 목록을 출력합니다." }
-        } else {
-            return { data: null, message: "회원 목록이 없습니다." }
+        const getRes = await fetch(path);
+        if (getRes.ok) {
+            const res = await getRes.json();
+            return { data: res, message: null };
+        }else{
+            const error = await getRes.text();
+            return { data: 1, message: error };
         }
     }
 )
 
 export const listOneThunk = createAsyncThunk(
     "listOneThunk",
-    async (username) => {
-        const res = data_set.filter(d => d.username === username)[0]
-        if (res) {
-            //  회원이 존재한다면
-            return { user: res, message: `${username}님을 출력합니다.` }
-        } else {
-            return { user: null, message: "회원 목록이 없습니다." }
+    async (id) => {
+        const getOneRes = await fetch(`${path}/${id}`);
+
+        if (getOneRes.ok) {
+            const res = await getOneRes.json();
+            return { user: res, message: null };
+        }else{
+            const error = await getOneRes.text();
+            return { user: 1, message: error };
+
         }
+
     }
 )
 
 export const deleteOneThunk = createAsyncThunk(
     "deleteOneThunk",
     async (user) => {
-        try {
-            data_set = data_set.filter(d => d !== user)
-            console.log(data_set)
-            return { success: 0, message: `${user.username}님을 삭제하였습니다.` }
-        } catch (error) {
-            return { success: 1, message: error }
+        console.log("deleteOneThunk user:" + user);
+        const delRes = await fetch(`${path}/${user.id}`, { method: "delete" })
+        if (delRes.ok) {
+            const res = await delRes.json();
+            return { success: res, message: null };
+        }else{
+            const error = await delRes.text();
+            return { success: 1, message: error };
+
         }
     }
 )
@@ -77,11 +95,18 @@ export const deleteOneThunk = createAsyncThunk(
 export const updateOneThunk = createAsyncThunk(
     "updateOneThunk",
     async (user) => {
-        try {
-            data_set = data_set.map(d => d.username === user.username ? user : d)
-            return { success: 0, message: `${user.username}님의 개인정보를 수정하였습니다.` }
-        } catch (error) {
-            return { success: 1, message: error }
+        const updateRes = await fetch(`${path}/${user.id}`, {
+            method: "put",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(user)
+        })
+        if (updateRes.ok) {
+            const res = await updateRes.json();
+            return { success: res, message: null };
+        }else{
+            const error = await updateRes.text();
+            return { success: 1, message: error };
+
         }
     }
 )

@@ -14,22 +14,21 @@ const ListOneCon = () => {
 
     useEffect(() => {
         const getList = async () => {
-            await dispatch(listOneThunk(params.username))
+            await dispatch(listOneThunk(params.id))
         }
         getList()
-        // console.log("params.username", params.username)
-    }, [])
+    }, [params])
 
 
     const onDelete = async (e) => {
         // 정보가 같은지 확인 후 해당 username 정보 삭제
         // 삭제 후 List로 이동
         try {
+            e.preventDefault()
             const res = await dispatch(deleteOneThunk(user))
             if (res.payload.success === 0) {
-                e.preventDefault()
 
-                alert(res.payload.message)
+                // alert(res.payload.message)
                 nav("/list")
             }
         }
@@ -49,7 +48,7 @@ const ListOneCon = () => {
         try {
             const res = await dispatch(updateOneThunk(user))
             if (res.payload.success === 0) {
-                alert(res.payload.message)
+                // alert(res.payload.message)
                 nav("/list")
             }
         } catch (error) {

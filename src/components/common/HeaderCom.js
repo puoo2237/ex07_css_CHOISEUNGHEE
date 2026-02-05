@@ -52,6 +52,8 @@ const StyleNav = styled.nav`
 const HeaderCom = () => {
     const dispatch = useDispatch()
     const { username, isLoggedIn } = useSelector((state) => state.auth.login);
+    useEffect(() => {
+    }, [isLoggedIn]);
 
     return (<>
         <WrapBlock>
@@ -68,7 +70,7 @@ const HeaderCom = () => {
 
                     {isLoggedIn ?
                         <ul>
-                            <li><Link onClick={e => dispatch(onLogout())}  to="/">로그아웃</Link></li>
+                            <li><Link onClick={e => dispatch(onLogout())} to="/">로그아웃</Link></li>
                             <li>{username}님</li>
                         </ul>
                         :

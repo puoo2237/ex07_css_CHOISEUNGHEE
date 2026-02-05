@@ -22,7 +22,7 @@ const authSlice = createSlice({
         },
         onLogout(state) {
             console.log("로그아웃을 하였습니다.")
-            sessionStorage.clear();
+            sessionStorage.removeItem("auth");
             return initialState
         },
 

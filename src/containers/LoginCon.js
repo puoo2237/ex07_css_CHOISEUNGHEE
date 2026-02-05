@@ -24,7 +24,7 @@ const LoginCon = () => {
         e.preventDefault();
         try {
             const res = await dispatch(loginThunk(login))
-            const resLoginThunk = res.payload
+            const resLoginThunk = res.payload;
             if (resLoginThunk.success === 0) {
                 dispatch(onLogin(login.username))
                 console.log("username: ", login.username)

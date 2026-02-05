@@ -71,18 +71,22 @@ const ListCom = ({ data, loading, error }) => {
                         <thead>
                             <tr>
                                 <th>아이디</th>
+                                <th>이용자</th>
                                 <th>비밀번호</th>
                                 <th>ROLE</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {data && data.map(d => (
-                                <tr key={d.username}>
-                                    <td><Link to={sessionNow ? `/one/${d.username}` : "/login"}>{d.username}</Link></td>
+                            {Array.isArray(data) && data.length > 0 ? data.map(d => (
+                                <tr key={d.id}>
+                                    <td><Link to={sessionNow ? `/one/${d.id}` : "/login"}>{d.id}</Link></td>
+                                    <td>{d.username}</td>
                                     <td>{d.password}</td>
                                     <td>{d.role}</td>
                                 </tr>
-                            ))}
+                            )) : (
+                                <tr><td colSpan={4}>데이터가 없습니다.</td></tr>
+                            )}
                         </tbody>
                     </Table>}
 
