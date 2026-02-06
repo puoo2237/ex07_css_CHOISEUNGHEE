@@ -23,6 +23,7 @@ const authSlice = createSlice({
         onLogout(state) {
             console.log("로그아웃을 하였습니다.")
             sessionStorage.removeItem("auth");
+            state.login = { username: "", isLoggedIn: false };
             return initialState
         },
 

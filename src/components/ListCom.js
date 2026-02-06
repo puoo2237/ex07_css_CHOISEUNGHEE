@@ -3,6 +3,9 @@ import StyleButton from "./common/StyleButton";
 import StyleForm from "./common/StyleForm";
 import StyleInput from "./common/StyleInput";
 import { Link } from "react-router-dom";
+import { onClick } from "../redux/memberDataSlice";
+import { useDispatch } from "react-redux";
+import { listThunk } from "../service/authThunk";
 
 const AuthBlock = styled.div`
     position: absolute;
@@ -58,10 +61,20 @@ const Table = styled.table`
     font-size: 13px;
     }
 `;
-const ListCom = ({ data, loading, error }) => {
+const ListCom = ({
+    isFirstPage,
+    totalPage,
+    pageNumber,
+    data, loading, error }) => {
     // 로그인 상태면 상세 페이지(/one)로 이동
     // 로그인 상태가 아니면 로그인 페이지(/login)로 이동
     const sessionNow = sessionStorage.getItem("auth")
+    const pageNumbers = {};
+    const dispatch = useDispatch();
+
+    for (let i = 0; i < totalPage; i++) {
+        pageNumbers[i] = i;
+    }
     return (<AuthBlock>
         <ListBox>
             <div className="logo-area">회원목록</div>
@@ -89,7 +102,14 @@ const ListCom = ({ data, loading, error }) => {
                             )}
                         </tbody>
                     </Table>}
-
+            <div style={{ textAlign: 'center' }}>
+                {Object.values(pageNumbers).length > 0 && Object.values(pageNumbers).map(num => {
+                    // let isCurrent = (!isFirstPage && num === pageNumber + 1) || (isFirstPage && num === pageNumber);
+                    return <span onClick={() => {
+                        dispatch(onClick({ value: num }));
+                        // isCurrent = true;
+                    }} key={num} >{num + 1}&nbsp;</span>
+                })} ({isFirstPage ? pageNumber + 1 : pageNumber} / {totalPage})</div>
         </ListBox>
     </AuthBlock >)
 }

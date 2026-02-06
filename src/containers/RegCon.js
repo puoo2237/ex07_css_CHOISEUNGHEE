@@ -31,8 +31,8 @@ const RegCon = () => {
                 nav("/login") // login으로 이동
             } else {
                 alert(resRegThunk.message)
-                dispatch(resetInput({ form: "register" })) // 초기화
             }
+            dispatch(resetInput({ form: "register" })) // 초기화
         } catch (error) {
 
         }

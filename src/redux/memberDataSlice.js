@@ -5,7 +5,7 @@ import { commonLoadingHandler } from "./commonLoadingHandlers";
 const memberDataSlice = createSlice({
     name: "member",
     initialState: {
-        data: null,
+        data: { number: 0, first: true, totalPages: 1, content: [] },
         user: null,
         loading: false,
         error: null,
@@ -16,11 +16,17 @@ const memberDataSlice = createSlice({
             const { name, value } = action.payload;
             state.user[name] = value;
         },
-    },
+        onClick(state, action){
+            state.data.number = action.payload.value}
+        }
+    ,
     extraReducers: (builder) => {
         builder
             .addCase(listThunk.fulfilled, (state, action) => {
-                state.data = action.payload.data
+                state.data.content = action.payload.data.content;
+                state.data.number = action.payload.data.number;
+                state.data.first = action.payload.data.first;
+                state.data.totalPages = action.payload.data.totalPages;
                 state.loading = false;
                 state.result = 0;
                 state.error = null;
@@ -38,4 +44,4 @@ const memberDataSlice = createSlice({
 })
 
 export default memberDataSlice;
-export const { changeInfo } = memberDataSlice.actions;
+export const { changeInfo, onClick } = memberDataSlice.actions;
