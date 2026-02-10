@@ -7,7 +7,7 @@ const initialState = {
     login: authSession ?
         JSON.parse(sessionStorage.getItem("auth")) :
         { username: "", isLoggedIn: false },
-    register: { username: "", password: "", role: "" },
+    register: { username: "", password: "", role: "", file: "" },
     loading: false,
     error: null,
     result: 1

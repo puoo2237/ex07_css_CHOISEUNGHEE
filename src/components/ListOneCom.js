@@ -15,7 +15,7 @@ const AuthBlock = styled.div`
 const ListBox = styled.div`
     position: absolute;
     width: 400px;
-    min-height: 300px;
+    min-height: 450px;
     top: 150px;
     left: calc(50% - 180px);
     background-color: white;
@@ -41,7 +41,7 @@ const ListBox = styled.div`
         }
     }
 `;
-const ListOneCom = ({ user, loading, error, onDelete, onChange, onUpdate }) => {
+const ListOneCom = ({ imageUrl, user, loading, error, onDelete, onChange, onUpdate }) => {
     // console.log("ListOneCom user", user)
     return (<AuthBlock>
         <ListBox>
@@ -49,6 +49,8 @@ const ListOneCom = ({ user, loading, error, onDelete, onChange, onUpdate }) => {
             {loading ? <h2>Loading...</h2> :
                 error ? <h2>{error}</h2> :
                     <StyleForm>
+                        {imageUrl && <img src={imageUrl} name="file" alt="profile" width="100" height="100" />}
+                        <input type="file" name="file" onChange={onChange} />
                         <div>username</div>
                         <StyleInput name="username" value={user && user.username} onChange={onChange} disabled></StyleInput>
                         <div>password</div>

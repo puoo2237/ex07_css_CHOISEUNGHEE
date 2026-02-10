@@ -61,19 +61,32 @@ const Table = styled.table`
     font-size: 13px;
     }
 `;
+
+const DivPage = styled.div`
+    text-align: center;
+    margin-top: 20px;
+`;
+const SpanPage = styled.div`
+    width: 30px;
+    display: inline-block;
+    cursor:pointer;
+    color ${(props)=>(props.$active ? "red":"black")};
+    &:hover{font-weight:bold;}`
+
 const ListCom = ({
-    isFirstPage,
     totalPage,
     pageNumber,
     data, loading, error }) => {
     // 로그인 상태면 상세 페이지(/one)로 이동
     // 로그인 상태가 아니면 로그인 페이지(/login)로 이동
     const sessionNow = sessionStorage.getItem("auth")
-    const pageNumbers = {};
+    const pageNumbers = [];
     const dispatch = useDispatch();
 
     for (let i = 0; i < totalPage; i++) {
-        pageNumbers[i] = i;
+        pageNumbers.push(<SpanPage onClick={() => {
+                        dispatch(onClick({ value: i }));
+                    }} key={i} >{i + 1}&nbsp;</SpanPage>);
     }
     return (<AuthBlock>
         <ListBox>
@@ -90,7 +103,7 @@ const ListCom = ({
                             </tr>
                         </thead>
                         <tbody>
-                            {Array.isArray(data) && data.length > 0 ? data.map(d => (
+                            {data && data.length > 0 ? data.map(d => (
                                 <tr key={d.id}>
                                     <td><Link to={sessionNow ? `/one/${d.id}` : "/login"}>{d.id}</Link></td>
                                     <td>{d.username}</td>
@@ -102,14 +115,8 @@ const ListCom = ({
                             )}
                         </tbody>
                     </Table>}
-            <div style={{ textAlign: 'center' }}>
-                {Object.values(pageNumbers).length > 0 && Object.values(pageNumbers).map(num => {
-                    // let isCurrent = (!isFirstPage && num === pageNumber + 1) || (isFirstPage && num === pageNumber);
-                    return <span onClick={() => {
-                        dispatch(onClick({ value: num }));
-                        // isCurrent = true;
-                    }} key={num} >{num + 1}&nbsp;</span>
-                })} ({isFirstPage ? pageNumber + 1 : pageNumber} / {totalPage})</div>
+            <DivPage>
+                {Object.values(pageNumbers).length > 0 && pageNumbers} ({pageNumber + 1 } / {totalPage})</DivPage>
         </ListBox>
     </AuthBlock >)
 }

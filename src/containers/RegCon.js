@@ -13,8 +13,8 @@ const RegCon = () => {
     const { register } = useSelector(state => state.input)
     const { loading, error } = useSelector(state => state.auth)
     const onChange = (e) => {
-        const { name, value } = e.target;
-        dispatch(changeInput({ name, value, form: "register" }));
+        const { name, value, type, files } = e.target;
+        dispatch(changeInput({ name, value, form: "register", type, files }));
     }
 
     const onSubmit = async (e) => {

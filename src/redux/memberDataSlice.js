@@ -6,19 +6,21 @@ const memberDataSlice = createSlice({
     name: "member",
     initialState: {
         data: { number: 0, first: true, totalPages: 1, content: [] },
-        user: null,
+        user: { id: null, username: null, password: null, role: null, file: null, fileName: null },
         loading: false,
         error: null,
         result: 1
     },
     reducers: {
         changeInfo(state, action) {
-            const { name, value } = action.payload;
-            state.user[name] = value;
+            const { name, value, files, type, form } = action.payload;
+            state[form][name] = type === "file" ? files?.[0] ?? null : value
+
         },
-        onClick(state, action){
-            state.data.number = action.payload.value}
+        onClick(state, action) {
+            state.data.number = action.payload.value
         }
+    }
     ,
     extraReducers: (builder) => {
         builder
@@ -32,7 +34,7 @@ const memberDataSlice = createSlice({
                 state.error = null;
             })
             .addCase(listOneThunk.fulfilled, (state, action) => {
-                state.user = action.payload.user
+                state.user = action.payload.user;
                 state.loading = false;
                 state.result = 0;
                 state.error = null;

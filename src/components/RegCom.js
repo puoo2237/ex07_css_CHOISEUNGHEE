@@ -15,7 +15,7 @@ const AuthBlock = styled.div`
 const RegBox = styled.div`
     position: absolute;
     width: 400px;
-    min-height: 220px;
+    min-height: 300px;
     top: 150px;
     left: calc(50% - 180px);
     background-color: white;
@@ -50,6 +50,7 @@ const RegCom = ({ reg, onChange, onSubmit, loading, error }) => {
                     <StyleInput type="text" placeholder="username" name="username" value={reg.username} onChange={onChange} required />
                     <StyleInput type="text" placeholder="password" name="password" value={reg.password} onChange={onChange} required />
                     <StyleInput type="text" placeholder="role" name="role" value={reg.role} onChange={onChange} required />
+                    <StyleInput type="file" name="file" onChange={onChange} />
                     <StyleButton width="100%" background={["178,235,244", 0.5]}>REGISTER</StyleButton>
                 </StyleForm>}
 

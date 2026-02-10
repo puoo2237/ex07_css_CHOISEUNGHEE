@@ -16,7 +16,7 @@ const ListCon = () => {
     return (<>
         <HeaderCom/>
         <ListCom pageNumber={data.number} 
-        isFirstPage={data.first} 
+        // isFirstPage={data.first} 
         totalPage={data.totalPages} 
         data={data.content} 
         loading={loading} error={error} />

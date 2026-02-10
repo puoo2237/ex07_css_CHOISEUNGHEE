@@ -1,23 +1,22 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { useSelector } from 'react-redux';
 
 const initialState = {
     login: { username: "", password: "" },
-    register: { username: "", password: "", role: "" },
+    register: { username: "", password: "", role: "", file: "" },
 }
 const inputSlice = createSlice({
     name: 'input',
     initialState: initialState,
     reducers: {
         changeInput(state, action) {
-            const { name, value, form } = action.payload;
-            state[form][name] = value;
+            const { name, value, form, files, type } = action.payload;
+            state[form][name] = type === "file" ? files?.[0] ?? null : value
         },
         resetInput(state, action) {
             const { form } = action.payload;
             state[form] = initialState[form];
         }
-        }
+    }
 })
 
 export default inputSlice;

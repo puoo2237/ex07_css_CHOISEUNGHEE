@@ -17,7 +17,6 @@ export const loginThunk = createAsyncThunk(
             body: JSON.stringify(user)
         })
         if (loginRes.ok) {
-            // const res = await loginRes.json();
             return { success: 0, message: "로그인 성공" };
         } else {
             const error = await loginRes.text();
@@ -29,14 +28,17 @@ export const loginThunk = createAsyncThunk(
 export const registerThunk = createAsyncThunk(
     "registerThunk",
     async (user) => {
+        const formData = new FormData();
+        formData.append("username", user.username);
+        formData.append("password", user.password);
+        formData.append("role", user.role);
+        if (user.file) formData.append("file", user.file);
         const regRes = await fetch(path, {
-            method: "post",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(user)
-        })
+        method: "POST",
+        body: formData
+        });
+
         if (regRes.ok) {
-            // const res = await regRes.json();
-            // username이 있으면
             return { success: 0, message: "회원가입 성공" };
         } else {
             const error = await regRes.text();
@@ -48,15 +50,13 @@ export const registerThunk = createAsyncThunk(
 export const listThunk = createAsyncThunk(
     "listThunk",
     async (page) => {
-        console.log("listThunk page:", page);
         const getRes = await fetch(path + "?start=" + page);
         if (getRes.ok) {
             const res = await getRes.json();
-            // console.log("listThunk res:", res);
             return { data: res, message: null };
         }else{
             const error = await getRes.text();
-            return { data: null, message: error };
+            return { data: { number: 0, first: true, totalPages: 1, content: [] }, message: error };
         }
     }
 )
@@ -81,10 +81,8 @@ export const listOneThunk = createAsyncThunk(
 export const deleteOneThunk = createAsyncThunk(
     "deleteOneThunk",
     async (user) => {
-        console.log("deleteOneThunk user:" + user);
-        const delRes = await fetch(`${path}/${user.id}`, { method: "delete" })
+        const delRes = await fetch(`${path}/${user.id}`, { method: "delete", body: user.fileName })
         if (delRes.ok) {
-            // const res = await delRes.json();
             return { success: 0, message: null };
         }else{
             const error = await delRes.text();
@@ -97,13 +95,18 @@ export const deleteOneThunk = createAsyncThunk(
 export const updateOneThunk = createAsyncThunk(
     "updateOneThunk",
     async (user) => {
+        const formData = new FormData();
+        formData.append("username", user.username);
+        formData.append("password", user.password);
+        formData.append("role", user.role);
+        formData.append("fileName", user.fileName);
+        if (user.file) formData.append("file", user.file);
+        console.log(user.id)
         const updateRes = await fetch(`${path}/${user.id}`, {
             method: "put",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(user)
+            body: formData
         })
         if (updateRes.ok) {
-            // const res = await updateRes.json();
             return { success: 0, message: null };
         }else{
             const error = await updateRes.text();
