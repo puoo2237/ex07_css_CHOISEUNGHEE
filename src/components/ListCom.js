@@ -70,7 +70,7 @@ const SpanPage = styled.div`
     width: 30px;
     display: inline-block;
     cursor:pointer;
-    color ${(props)=>(props.$active ? "red":"black")};
+    color ${(props) => (props.$active ? "red" : "black")};
     &:hover{font-weight:bold;}`
 
 const ListCom = ({
@@ -85,8 +85,8 @@ const ListCom = ({
 
     for (let i = 0; i < totalPage; i++) {
         pageNumbers.push(<SpanPage onClick={() => {
-                        dispatch(onClick({ value: i }));
-                    }} key={i} >{i + 1}&nbsp;</SpanPage>);
+            dispatch(onClick({ value: i }));
+        }} key={i} >{i + 1}&nbsp;</SpanPage>);
     }
     return (<AuthBlock>
         <ListBox>
@@ -98,16 +98,16 @@ const ListCom = ({
                             <tr>
                                 <th>아이디</th>
                                 <th>이용자</th>
-                                <th>비밀번호</th>
+                                {/* <th>비밀번호</th> */}
                                 <th>ROLE</th>
                             </tr>
                         </thead>
                         <tbody>
                             {data && data.length > 0 ? data.map(d => (
                                 <tr key={d.id}>
-                                    <td><Link to={sessionNow ? `/one/${d.id}` : "/login"}>{d.id}</Link></td>
+                                    <td><Link to={JSON.parse(sessionNow)["isLoggedIn"] ? (JSON.parse(sessionNow)["username"] === d.username ? `/one/${d.id}` : '/list') : "/login"}>{d.id}</Link></td>
                                     <td>{d.username}</td>
-                                    <td>{d.password}</td>
+                                    {/* <td>{d.password}</td> */}
                                     <td>{d.role}</td>
                                 </tr>
                             )) : (
@@ -116,7 +116,7 @@ const ListCom = ({
                         </tbody>
                     </Table>}
             <DivPage>
-                {Object.values(pageNumbers).length > 0 && pageNumbers} ({pageNumber + 1 } / {totalPage})</DivPage>
+                {Object.values(pageNumbers).length > 0 && pageNumbers} ({pageNumber + 1} / {totalPage})</DivPage>
         </ListBox>
     </AuthBlock >)
 }

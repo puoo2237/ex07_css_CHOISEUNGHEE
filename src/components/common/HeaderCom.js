@@ -51,9 +51,19 @@ const StyleNav = styled.nav`
 `;
 const HeaderCom = () => {
     const dispatch = useDispatch()
-    const { username, isLoggedIn } = useSelector((state) => state.auth.login);
+    const { username, isLoggedIn, role, exp } = useSelector((state) => state.auth.login);
+
+    const currentTime = Date.now();
+    const timeout = exp * 1000 - currentTime;
     useEffect(() => {
-    }, [isLoggedIn]);
+        setTimeout(() => {
+            alert("로그아웃 됨")
+            dispatch(onLogout());
+        }, timeout)
+    }, [dispatch]);
+
+    // useEffect(() => {
+    // }, [isLoggedIn]);
 
     return (<>
         <WrapBlock>
@@ -66,6 +76,7 @@ const HeaderCom = () => {
                         <li><Link to="/">사료</Link></li>
                         <li><Link to="/">간식</Link></li>
                         <li><Link to="/list">LIST</Link></li>
+                        {role === 'ROLE_ADMIN' && <><li><Link to="/list">ADMIN</Link></li></>}
                     </ul>
 
                     {isLoggedIn ?

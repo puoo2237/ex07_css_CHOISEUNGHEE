@@ -6,7 +6,7 @@ const memberDataSlice = createSlice({
     name: "member",
     initialState: {
         data: { number: 0, first: true, totalPages: 1, content: [] },
-        user: { id: null, username: null, password: null, role: null, file: null, fileName: null },
+        user: { id: "", username: "", password: "", role: "", file: "", fileName: "" },
         loading: false,
         error: null,
         result: 1

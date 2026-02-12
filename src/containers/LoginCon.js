@@ -25,10 +25,12 @@ const LoginCon = () => {
         try {
             const res = await dispatch(loginThunk(login))
             const resLoginThunk = res.payload;
-            if (resLoginThunk.success === 0) {
-                dispatch(onLogin(login.username))
+            if (resLoginThunk.success !== null) {
+                const token = resLoginThunk.success.token;
+                dispatch(onLogin({ username: login.username, token }))
                 console.log("username: ", login.username)
                 console.log("password: ", login.password)
+                console.log("token: ", token)
                 nav("/")
 
             } else {

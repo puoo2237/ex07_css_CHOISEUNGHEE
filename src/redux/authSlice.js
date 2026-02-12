@@ -6,7 +6,7 @@ const authSession = sessionStorage.getItem("auth")
 const initialState = {
     login: authSession ?
         JSON.parse(sessionStorage.getItem("auth")) :
-        { username: "", isLoggedIn: false },
+        { username: "", isLoggedIn: false, token: "", role: "", exp: "" },
     register: { username: "", password: "", role: "", file: "" },
     loading: false,
     error: null,
@@ -17,13 +17,22 @@ const authSlice = createSlice({
     initialState: initialState,
     reducers: {
         onLogin(state, action) {
-            state.login = { username: action.payload, isLoggedIn: true }
+            state.login = {
+                username: action.payload.username,
+                isLoggedIn: true,
+                token: action.payload.token,
+                role: JSON.parse(atob(action.payload.token.split(".")[1]))['role'],
+                exp: JSON.parse(atob(action.payload.token.split(".")[1]))['exp']
+            }
+            // console.log(state.login)
             sessionStorage.setItem("auth", JSON.stringify(state.login))
+
+
         },
         onLogout(state) {
             console.log("로그아웃을 하였습니다.")
             sessionStorage.removeItem("auth");
-            state.login = { username: "", isLoggedIn: false };
+            // state.login = { username: "", isLoggedIn: false,  token: "", role: "", exp: ""};
             return initialState
         },
 

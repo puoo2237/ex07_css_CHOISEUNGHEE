@@ -11,16 +11,19 @@ const path = service_path + "/members";
 export const loginThunk = createAsyncThunk(
     "loginThunk",
     async (user) => {
-        const loginRes = await fetch(path + "/login", {
+        const formData = new FormData();
+        formData.append("username", user.username);
+        formData.append("password", user.password);
+        const loginRes = await fetch(service_path + "/auth/login", {
             method: "post",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(user)
+            body: formData
         })
         if (loginRes.ok) {
-            return { success: 0, message: "로그인 성공" };
+            const res = await loginRes.json();
+            return { success: res, message: "로그인 성공" };
         } else {
             const error = await loginRes.text();
-            return { success: 1, message: error };
+            return { success: null, message: error };
         }
     }
 )
@@ -34,8 +37,8 @@ export const registerThunk = createAsyncThunk(
         formData.append("role", user.role);
         if (user.file) formData.append("file", user.file);
         const regRes = await fetch(path, {
-        method: "POST",
-        body: formData
+            method: "post",
+            body: formData
         });
 
         if (regRes.ok) {
@@ -54,7 +57,7 @@ export const listThunk = createAsyncThunk(
         if (getRes.ok) {
             const res = await getRes.json();
             return { data: res, message: null };
-        }else{
+        } else {
             const error = await getRes.text();
             return { data: { number: 0, first: true, totalPages: 1, content: [] }, message: error };
         }
@@ -63,13 +66,19 @@ export const listThunk = createAsyncThunk(
 
 export const listOneThunk = createAsyncThunk(
     "listOneThunk",
-    async (id) => {
-        const getOneRes = await fetch(`${path}/${id}`);
+    async ({id, token}) => {
+        const getOneRes = await fetch(`${path}/${id}`,
+            {
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                }
+            },
+        );
 
         if (getOneRes.ok) {
             const res = await getOneRes.json();
             return { user: res, message: null };
-        }else{
+        } else {
             const error = await getOneRes.text();
             return { user: null, message: error };
 
@@ -80,11 +89,17 @@ export const listOneThunk = createAsyncThunk(
 
 export const deleteOneThunk = createAsyncThunk(
     "deleteOneThunk",
-    async (user) => {
-        const delRes = await fetch(`${path}/${user.id}`, { method: "delete", body: user.fileName })
+    async ({ user, token }) => {
+        const delRes = await fetch(`${path}/${user.id}`, {
+            method: "delete",
+            headers: {
+                "Authorization": `Bearer ${token}`,
+            },
+            body: user.fileName
+        })
         if (delRes.ok) {
             return { success: 0, message: null };
-        }else{
+        } else {
             const error = await delRes.text();
             return { success: 1, message: error };
 
@@ -94,7 +109,7 @@ export const deleteOneThunk = createAsyncThunk(
 
 export const updateOneThunk = createAsyncThunk(
     "updateOneThunk",
-    async (user) => {
+    async ({ user, token }) => {
         const formData = new FormData();
         formData.append("username", user.username);
         formData.append("password", user.password);
@@ -104,11 +119,14 @@ export const updateOneThunk = createAsyncThunk(
         console.log(user.id)
         const updateRes = await fetch(`${path}/${user.id}`, {
             method: "put",
+            headers: {
+                "Authorization": `Bearer ${token}`,
+            },
             body: formData
         })
         if (updateRes.ok) {
             return { success: 0, message: null };
-        }else{
+        } else {
             const error = await updateRes.text();
             return { success: 1, message: error };
 

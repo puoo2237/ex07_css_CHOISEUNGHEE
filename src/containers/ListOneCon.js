@@ -5,10 +5,11 @@ import { deleteOneThunk, listOneThunk, updateOneThunk } from "../service/authThu
 import ListOneCom from "../components/ListOneCom";
 import HeaderCom from "../components/common/HeaderCom";
 import { changeInfo } from "../redux/memberDataSlice";
-import {service_path} from "../service/service_ip_port";
+import { service_path } from "../service/service_ip_port";
 import { type } from "@testing-library/user-event/dist/type";
 
 const ListOneCon = () => {
+    const { login } = useSelector(state => state.auth)
     const { user, loading, error } = useSelector(state => state.list)
     const params = useParams()
     const nav = useNavigate()
@@ -19,8 +20,8 @@ const ListOneCon = () => {
     const path = service_path;
     useEffect(() => {
         const getList = async () => {
-             const wrapRes = await dispatch(listOneThunk(params.id)).unwrap();
-            if(wrapRes.user.fileName){
+            const wrapRes = await dispatch(listOneThunk({id: params.id, token: login.token})).unwrap();
+            if (wrapRes.user?.fileName) {
                 const res = await fetch(`${path}/members/${wrapRes.user.fileName}/image`)
                 setImageUrl(URL.createObjectURL(await res.blob()))
             }
@@ -34,7 +35,7 @@ const ListOneCon = () => {
         // 삭제 후 List로 이동
         try {
             e.preventDefault()
-            const res = await dispatch(deleteOneThunk(user))
+            const res = await dispatch(deleteOneThunk({user, token: login.token}))
             if (res.payload.success === 0) {
 
                 // alert(res.payload.message)
@@ -56,7 +57,7 @@ const ListOneCon = () => {
         e.preventDefault()
         try {
             console.log("user to update:", user)
-            const res = await dispatch(updateOneThunk(user))
+            const res = await dispatch(updateOneThunk({user, token: login.token}))
             if (res.payload.success === 0) {
                 // alert(res.payload.message)
                 nav("/list")
