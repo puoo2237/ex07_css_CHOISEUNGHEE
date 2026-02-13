@@ -1,11 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import { service_path } from "./service_ip_port"
 
-// let data_set = [
-//     { username: "aaa", password: "aaa", role: "USER" },
-//     { username: "bbb", password: "bbb", role: "USER" },
-//     { username: "ccc", password: "ccc", role: "USER" },
-// ]
 
 const path = service_path + "/members";
 export const loginThunk = createAsyncThunk(

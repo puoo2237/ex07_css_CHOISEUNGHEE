@@ -3,13 +3,12 @@ import { onClick } from "../redux/memberDataSlice";
 import { useDispatch } from "react-redux";
 import { StyleBlock, DivPage, ListBox, SpanPage, Table } from "./common/StyleCom";
 
-const ListCom = ({
+const AdminCom = ({
     totalPage,
     pageNumber,
     data, loading, error }) => {
     // 로그인 상태면 상세 페이지(/one)로 이동
     // 로그인 상태가 아니면 로그인 페이지(/login)로 이동
-    const sessionNow = JSON.parse(sessionStorage.getItem("auth"))
     const pageNumbers = [];
     const dispatch = useDispatch();
 
@@ -28,21 +27,14 @@ const ListCom = ({
                             <tr>
                                 <th>회원번호</th>
                                 <th>회원 아이디</th>
-                                {/* <th>비밀번호</th> */}
                                 <th>ROLE</th>
                             </tr>
                         </thead>
                         <tbody>
                             {data && data.length > 0 ? data.map(d => (
                                 <tr key={d.id}>
-                                    <td><Link to={sessionNow && sessionNow.isLoggedIn
-                                                    ? ((sessionNow.username === d.username) 
-                                                            ? `/one/${d.id}`
-                                                            : '/list') 
-                                                    : "/login"}
-                                        >{d.id}</Link></td>
+                                    <td><Link to={`/one/${d.id}`}>{d.id}</Link></td>
                                     <td>{d.username}</td>
-                                    {/* <td>{d.password}</td> */}
                                     <td>{d.role}</td>
                                 </tr>
                             )) : (
@@ -55,4 +47,4 @@ const ListCom = ({
         </ListBox>
     </StyleBlock >)
 }
-export default ListCom;
+export default AdminCom;

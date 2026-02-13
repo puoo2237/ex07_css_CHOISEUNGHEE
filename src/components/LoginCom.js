@@ -1,53 +1,17 @@
 import { Link } from "react-router-dom";
-import styled from "styled-components"
 import StyleInput from "./common/StyleInput";
 import StyleForm from "./common/StyleForm";
 import StyleButton from "./common/StyleButton";
+import { StyleBlock, ListBox } from "./common/StyleCom";
 
-const AuthBlock = styled.div`
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    background-color: rgba(0, 0, 0, 0.1);
-`;
-const LoginBox = styled.div`
-    position: absolute;
-    width: 360px;
-    min-height: 200px;
-    top: 150px;
-    left: calc(50% - 180px);
-    background-color: white;
-    padding-top: 20px;
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
-    border-radius: 5px;
-    .logo-area{
-        text-align: center;
-        font-weight: bold;
-        letter-spacing: 5px;
-        font-size: 20px;
-        border-bottom: 1px dotted olive;
-        padding-bottom: 5px;
-        width: 50%;
-        margin: 0 auto;
-        a {
-            color: darkcyan;
-
-            &:hover {
-                color: cyan;
-            }
-        }
-    }
-`;
 const LoginCom = ({ login, onSubmit, onChange, loading, error }) => {
     return (<>
-        <AuthBlock> {
+        <StyleBlock> {
             loading ?
                 <h2>Login...</h2> :
                 error ?
                     <h2>{error}</h2> :
-                    <LoginBox LoginBox >
+                    <ListBox LoginBox >
                         <div className="logo-area">
                             <Link to='/'>탱이냥 이동</Link>
                         </div>
@@ -56,9 +20,9 @@ const LoginCom = ({ login, onSubmit, onChange, loading, error }) => {
                             <StyleInput onChange={onChange} name="password" value={login.password} placeholder="input password" />
                             <StyleButton width="100%" background={["178,235,244", 0.5]}>로그인</StyleButton>
                         </StyleForm>
-                    </LoginBox>
+                    </ListBox>
                     }
-        </AuthBlock >
+        </StyleBlock >
     </>)
 }
 export default LoginCom
