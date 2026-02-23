@@ -7,22 +7,33 @@ import RegCon from './containers/RegCon';
 import ListCon from './containers/ListCon';
 import ListOneCon from './containers/ListOneCon';
 import UpdateCon from './containers/UpdateCon';
-import AdminCon from './containers/AdmintCon';
+import AdminCon from './containers/AdminCon';
+import PostCon from './containers/PostCon';
+import PostOneCon from './containers/PostOneCon';
+import PostUpdateCon from './containers/PostUpdateCon';
+import HeaderCom from './components/common/HeaderCom';
+import PostAddCon from './containers/PostAddCon';
 
 
 function App() {
   return (
     <>
-    <Routes>
-      <Route path="/" element={<IndexCon/>}></Route>
-      <Route path="/login" element={<LoginCon/>}></Route>
-      <Route path="/register" element={<RegCon/>}></Route>
-      <Route path="/list" element={<ListCon/>}></Route>
-      <Route path="/update/:id" element={<UpdateCon/>}></Route>
-      <Route path="/admin" element={<AdminCon/>}></Route>
-      <Route path="/one/:id" element={<ListOneCon/>}></Route>
-    </Routes>
-    
+      <Routes>
+        <Route element={<HeaderCom />}>
+          <Route path="/" element={<IndexCon />} />
+          <Route path="/login" element={<LoginCon />} />
+          <Route path="/register" element={<RegCon />} />
+          <Route path="/list" element={<ListCon />} />
+          <Route path="/list/update/:id" element={<UpdateCon />} />
+          <Route path="/list/one/:id" element={<ListOneCon />} />
+          <Route path="/post" element={<PostCon />} />
+          <Route path="/post/one/:id" element={<PostOneCon />} />
+          <Route path="/post/update/:id" element={<PostUpdateCon />} />
+          <Route path="/post/add" element={<PostAddCon />} />
+          <Route path="/admin" element={<AdminCon />} />
+        </Route>
+      </Routes>
+
     </>
   );
 }

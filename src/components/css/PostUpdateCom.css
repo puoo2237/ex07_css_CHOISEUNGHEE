@@ -1,0 +1,81 @@
+.post-update-wrapper {
+  position: absolute;
+  top: 150px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.post-update-card {
+  width: 800px;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 40px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.post-update-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 30px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+
+.form-group {
+  margin-bottom: 25px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-label {
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.form-input,
+.form-textarea {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 12px;
+  font-size: 15px;
+  transition: 0.2s;
+}
+
+.form-input {
+  height: 45px;
+}
+
+.form-textarea {
+  min-height: 180px;
+  resize: none;
+}
+
+.form-input:focus,
+.form-textarea:focus {
+  border-color: #faad14;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(250, 173, 20, 0.1);
+}
+
+.update-area {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.update-btn {
+  width: 120px;
+  height: 42px;
+  border: none;
+  border-radius: 6px;
+  background-color: #faad14;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.update-btn:hover {
+  background-color: #d48806;
+}

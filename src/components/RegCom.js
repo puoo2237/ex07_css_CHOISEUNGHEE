@@ -1,22 +1,73 @@
-import StyleButton from "./common/StyleButton";
-import StyleForm from "./common/StyleForm";
-import StyleInput from "./common/StyleInput";
-import { StyleBlock, ListBox } from "./common/StyleCom";
+import "./css/RegCom.css";
 
 const RegCom = ({ reg, onChange, onSubmit, loading, error }) => {
-    return (<StyleBlock>
-        <ListBox>
-            <div className="logo-area">회원가입</div>
-            {loading ? <h2>Register...</h2> :
-                error ? <h2>{error}</h2> : <StyleForm onSubmit={onSubmit}>
-                    <StyleInput type="text" placeholder="username" name="username" value={reg.username} onChange={onChange} required />
-                    <StyleInput type="text" placeholder="password" name="password" value={reg.password} onChange={onChange} required />
-                    <StyleInput type="text" placeholder="role" name="role" value={reg.role} onChange={onChange} />
-                    <StyleInput type="file" name="file" onChange={onChange} />
-                    <StyleButton width="100%" background={["178,235,244", 0.5]}>REGISTER</StyleButton>
-                </StyleForm>}
+  return (
+    <div className="reg-wrapper">
+      <div className="reg-card">
 
-        </ListBox>
-    </StyleBlock>)
-}
+        <div className="reg-title">회원가입</div>
+
+        {loading ? (
+          <h2 className="loading-text">Register...</h2>
+        ) : error ? (
+          <h2 className="error-text">{error}</h2>
+        ) : (
+          <form onSubmit={onSubmit}>
+
+            <div className="form-group">
+              <input
+                type="text"
+                placeholder="username"
+                name="username"
+                value={reg.username}
+                onChange={onChange}
+                required
+                className="form-input"
+              />
+            </div>
+
+            <div className="form-group">
+              <input
+                type="password"
+                placeholder="password"
+                name="password"
+                value={reg.password}
+                onChange={onChange}
+                required
+                className="form-input"
+              />
+            </div>
+
+            <div className="form-group">
+              <input
+                type="text"
+                placeholder="role"
+                name="role"
+                value={reg.role}
+                onChange={onChange}
+                className="form-input"
+              />
+            </div>
+
+            <div className="form-group">
+              <input
+                type="file"
+                name="file"
+                onChange={onChange}
+                className="file-input"
+              />
+            </div>
+
+            <button type="submit" className="submit-btn">
+              REGISTER
+            </button>
+
+          </form>
+        )}
+
+      </div>
+    </div>
+  );
+};
+
 export default RegCom;

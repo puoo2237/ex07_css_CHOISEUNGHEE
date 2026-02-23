@@ -1,0 +1,83 @@
+.update-wrapper {
+  position: absolute;
+  top: 150px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.update-card {
+  width: 500px;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 40px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.update-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 30px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+  text-align: center;
+}
+
+.profile-img {
+  display: block;
+  margin: 0 auto 20px auto;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-label {
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.form-input {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 12px;
+  font-size: 15px;
+  transition: 0.2s;
+}
+
+.form-input:focus {
+  border-color: #1890ff;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.1);
+}
+
+.file-input {
+  margin-bottom: 20px;
+}
+
+.submit-btn {
+  width: 100%;
+  height: 42px;
+  border: none;
+  border-radius: 6px;
+  background-color: #1890ff;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.submit-btn:hover {
+  background-color: #0f6cd1;
+}
+
+.loading-text,
+.error-text {
+  text-align: center;
+  margin-top: 20px;
+}

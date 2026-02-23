@@ -38,7 +38,6 @@ const memberDataSlice = createSlice({
                 state.loading = false;
                 state.result = 0;
                 state.error = null;
-                console.log("state.user:", state.user)
             })
         commonLoadingHandler(builder, listThunk)
         commonLoadingHandler(builder, listOneThunk)

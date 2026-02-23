@@ -1,0 +1,83 @@
+.post-wrapper {
+  position: absolute;   /* 메뉴바 아래로 떨어지게 유지 */
+  top: 150px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.post-card {
+  width: 800px;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  transition: 0.3s;
+}
+
+.post-card:hover {
+  transform: translateY(-4px);
+}
+
+.post-header {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 15px;
+  margin-bottom: 20px;
+}
+
+.post-title {
+  margin: 0;
+  font-size: 24px;
+  color: #222;
+}
+
+.post-meta {
+  margin-top: 10px;
+  display: flex;
+  gap: 20px;
+  font-size: 14px;
+  color: #666;
+}
+
+.post-content {
+  min-height: 150px;
+  line-height: 1.6;
+  font-size: 16px;
+  color: #333;
+  white-space: pre-wrap;
+}
+
+.post-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 25px;
+}
+
+.btn {
+  padding: 8px 18px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.btn.delete {
+  background-color: #ff4d4f;
+  color: white;
+}
+
+.btn.delete:hover {
+  background-color: #d9363e;
+}
+
+.btn.edit {
+  background-color: #1890ff;
+  color: white;
+}
+
+.btn.edit:hover {
+  background-color: #0f6cd1;
+}

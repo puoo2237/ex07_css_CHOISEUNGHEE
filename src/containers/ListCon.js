@@ -4,22 +4,28 @@ import { listThunk } from "../service/authThunk";
 import { useEffect } from "react";
 import HeaderCom from "../components/common/HeaderCom";
 import { onClick } from "../redux/memberDataSlice";
+import { trackPage } from "../redux/pathSlice";
+import { useLocation } from "react-router-dom";
 
 const ListCon = () => {
     const dispatch = useDispatch();
     const {data, loading, error } = useSelector(state => state.list)
-    
+    const location = useLocation(); // 현재 URL 경로
+    useEffect(()=>{
+        dispatch(trackPage(location.pathname));
+    }, [])
+
     useEffect(() => {
         dispatch(listThunk(data.number))
     }, [dispatch, data.number]);
 
     return (<>
-        <HeaderCom/>
-        <ListCom pageNumber={data.number} 
-        // isFirstPage={data.first} 
-        totalPage={data.totalPages} 
+        <ListCom 
         data={data.content} 
-        loading={loading} error={error} />
+        pageNumber={data.number} 
+        totalPage={data.totalPages} 
+        loading={loading} error={error} 
+        />
     </>)
 }
 export default ListCon;

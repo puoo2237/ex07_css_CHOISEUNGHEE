@@ -1,0 +1,89 @@
+.post-list-wrapper {
+  position: absolute;
+  top: 150px;
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.post-list-container {
+  width: 1000px;
+}
+
+.post-add-area {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+.post-add-btn {
+  padding: 8px 18px;
+  border-radius: 6px;
+  border: none;
+  background-color: #1890ff;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.post-add-btn:hover {
+  background-color: #0f6cd1;
+}
+
+.post-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+}
+
+.post-table thead {
+  background-color: #f5f7fa;
+}
+
+.post-table th {
+  padding: 14px;
+  font-weight: 600;
+  border-bottom: 1px solid #ddd;
+}
+
+.post-table td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+}
+
+.post-row {
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.post-row:hover {
+  background-color: #f0f5ff;
+}
+
+.post-title-cell {
+  text-align: left;
+  padding-left: 20px;
+  width: 50%;
+}
+
+.pagination {
+  margin-top: 25px;
+  text-align: center;
+}
+
+.page-number {
+  margin: 0 6px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.page-number:hover {
+  color: #1890ff;
+  font-weight: 700;
+}

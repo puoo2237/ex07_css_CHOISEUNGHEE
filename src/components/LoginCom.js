@@ -1,28 +1,56 @@
 import { Link } from "react-router-dom";
-import StyleInput from "./common/StyleInput";
-import StyleForm from "./common/StyleForm";
-import StyleButton from "./common/StyleButton";
-import { StyleBlock, ListBox } from "./common/StyleCom";
+import "./css/LoginCom.css";
 
 const LoginCom = ({ login, onSubmit, onChange, loading, error }) => {
-    return (<>
-        <StyleBlock> {
-            loading ?
-                <h2>Login...</h2> :
-                error ?
-                    <h2>{error}</h2> :
-                    <ListBox LoginBox >
-                        <div className="logo-area">
-                            <Link to='/'>탱이냥 이동</Link>
-                        </div>
-                        <StyleForm onSubmit={onSubmit}>
-                            <StyleInput onChange={onChange} name="username" value={login.username} placeholder="input username" />
-                            <StyleInput onChange={onChange} name="password" value={login.password} placeholder="input password" />
-                            <StyleButton width="100%" background={["178,235,244", 0.5]}>로그인</StyleButton>
-                        </StyleForm>
-                    </ListBox>
-                    }
-        </StyleBlock >
-    </>)
-}
-export default LoginCom
+  return (
+    <div className="login-wrapper">
+      <div className="login-card">
+
+        {loading ? (
+          <h2 className="loading-text">Login...</h2>
+        ) : error ? (
+          <h2 className="error-text">{error}</h2>
+        ) : (
+          <>
+            <Link to="/" className="logo-link">
+              탱이냥 이동
+            </Link>
+
+            <form onSubmit={onSubmit}>
+              <div className="form-group">
+                <input
+                  type="text"
+                  name="username"
+                  value={login.username}
+                  onChange={onChange}
+                  placeholder="input username"
+                  className="form-input"
+                  required
+                />
+              </div>
+
+              <div className="form-group">
+                <input
+                  type="password"
+                  name="password"
+                  value={login.password}
+                  onChange={onChange}
+                  placeholder="input password"
+                  className="form-input"
+                  required
+                />
+              </div>
+
+              <button type="submit" className="submit-btn">
+                로그인
+              </button>
+            </form>
+          </>
+        )}
+
+      </div>
+    </div>
+  );
+};
+
+export default LoginCom;

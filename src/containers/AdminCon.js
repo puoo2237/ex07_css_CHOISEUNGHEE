@@ -1,12 +1,17 @@
 import { useDispatch, useSelector } from "react-redux";
 import { listThunk } from "../service/authThunk";
 import { useEffect } from "react";
-import HeaderCom from "../components/common/HeaderCom";
-import { onClick } from "../redux/memberDataSlice";
 import AdminCom from "../components/AdminCom";
+import { useLocation } from "react-router-dom";
+import { trackPage } from "../redux/pathSlice";
 
 const AdminCon = () => {
     const dispatch = useDispatch();
+    const location = useLocation(); // 현재 URL 경로
+    useEffect(()=>{
+        dispatch(trackPage(location.pathname));
+    }, [])
+
     const {data, loading, error } = useSelector(state => state.list)
     
     useEffect(() => {
@@ -14,7 +19,6 @@ const AdminCon = () => {
     }, [dispatch, data.number]);
 
     return (<>
-        <HeaderCom/>
         <AdminCom pageNumber={data.number} 
         // isFirstPage={data.first} 
         totalPage={data.totalPages} 

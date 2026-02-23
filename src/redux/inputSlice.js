@@ -3,7 +3,8 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
     login: { username: "", password: "" },
     register: { username: "", password: "", role: "", file: "" },
-    user: { id: "", username: "", password: "", role: "", file: "", fileName: "" }
+    user: { id: "", username: "", password: "", role: "", file: "", fileName: "" },
+    post: { title: "", content: "" }
 }
 const inputSlice = createSlice({
     name: 'input',

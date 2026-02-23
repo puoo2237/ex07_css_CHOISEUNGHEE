@@ -1,16 +1,21 @@
-import HeaderCom from "../components/common/HeaderCom"
 import LoginCom from "../components/LoginCom"
 import { useDispatch, useSelector } from "react-redux"
 import { changeInput, resetInput } from "../redux/inputSlice";
 import { loginThunk } from "../service/authThunk";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { onLogin } from "../redux/authSlice";
+import { useEffect } from "react";
+import { trackPage } from "../redux/pathSlice";
 
 const LoginCon = () => {
     const dispatch = useDispatch();
     const nav = useNavigate();
     const { login } = useSelector(state => state.input)
     const { loading, error } = useSelector(state => state.auth)
+    const location = useLocation(); // 현재 URL 경로
+    useEffect(()=>{
+        dispatch(trackPage(location.pathname));
+    }, [])
 
     const onChange = (e) => {
         const { name, value } = e.target;
@@ -18,9 +23,6 @@ const LoginCon = () => {
     }
 
     const onSubmit = async (e) => {
-        // 로그인이 완료되면 메뉴 상태 변경
-        // LOGIN 버튼 누르면 정보 출력
-        // home으로 이동
         e.preventDefault();
         try {
             const res = await dispatch(loginThunk(login))
@@ -45,7 +47,6 @@ const LoginCon = () => {
     }
 
     return (<>
-        <HeaderCom />
         <LoginCom login={login} onSubmit={onSubmit} onChange={onChange} loading={loading} error={error} />
     </>)
 }

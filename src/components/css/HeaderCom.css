@@ -1,0 +1,88 @@
+/* 상단 전체 래퍼 */
+.header-wrapper {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #ffffff;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+  z-index: 1000;
+}
+
+/* 내부 콘텐츠 중앙 정렬 */
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* 사이트 제목/로고 */
+.header-title .link {
+  font-size: 24px;
+  font-weight: 700;
+  text-decoration: none;
+  color: #1890ff;
+  transition: 0.2s;
+}
+
+.header-title .link:hover {
+  color: #0f6cd1;
+}
+
+/* 메뉴바 */
+.header-nav {
+  display: flex;
+  gap: 50px;
+  .menu {
+    font-size: 18px;
+    font-weight: 500;
+    color: #333;
+    text-decoration: none;
+    transition: 0.2s;
+  }
+}
+
+.header-nav ul {
+  display: flex;
+  list-style: none;
+  gap: 20px;
+  padding: 0;
+  margin: 0;
+}
+
+.header-nav ul li a {
+  text-decoration: none;
+  font-weight: 500;
+  color: #333;
+  transition: 0.2s;
+}
+
+.header-nav ul li a:hover {
+  color: #1890ff;
+}
+
+/* 로그인/회원가입 or 로그아웃/사용자 이름 */
+.user-nav {
+  display: flex;
+  list-style: none;
+  gap: 15px;
+  align-items: center;
+}
+
+.user-nav li a {
+  text-decoration: none;
+  font-weight: 500;
+  color: #333;
+  transition: 0.2s;
+}
+
+.user-nav li a:hover {
+  color: #1890ff;
+}
+
+/* 메인 콘텐츠 여백 (헤더 높이만큼 패딩) */
+.main-content {
+  padding-top: 70px; 
+}

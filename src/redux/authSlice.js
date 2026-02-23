@@ -24,7 +24,6 @@ const authSlice = createSlice({
                 role: JSON.parse(atob(action.payload.token.split(".")[1]))['role'],
                 exp: JSON.parse(atob(action.payload.token.split(".")[1]))['exp']
             }
-            // console.log(state.login)
             sessionStorage.setItem("auth", JSON.stringify(state.login))
 
 

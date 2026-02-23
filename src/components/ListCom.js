@@ -1,58 +1,74 @@
-import { Link } from "react-router-dom";
-import { onClick } from "../redux/memberDataSlice";
 import { useDispatch } from "react-redux";
-import { StyleBlock, DivPage, ListBox, SpanPage, Table } from "./common/StyleCom";
+import { useNavigate } from "react-router-dom";
+import { onClick } from "../redux/memberDataSlice";
+import "./css/ListCom.css";
 
-const ListCom = ({
-    totalPage,
-    pageNumber,
-    data, loading, error }) => {
-    // 로그인 상태면 상세 페이지(/one)로 이동
-    // 로그인 상태가 아니면 로그인 페이지(/login)로 이동
-    const sessionNow = JSON.parse(sessionStorage.getItem("auth"))
-    const pageNumbers = [];
-    const dispatch = useDispatch();
+const ListCom = ({ totalPage, pageNumber, data, loading, error }) => {
+  const sessionNow = JSON.parse(sessionStorage.getItem("auth"));
+  const dispatch = useDispatch();
+  const nav = useNavigate();
 
-    for (let i = 0; i < totalPage; i++) {
-        pageNumbers.push(<SpanPage onClick={() => {
-            dispatch(onClick({ value: i }));
-        }} key={i} >{i + 1}&nbsp;</SpanPage>);
-    }
-    return (<StyleBlock>
-        <ListBox>
-            <div className="logo-area">회원목록</div>
-            {loading ? <h2>Loading...</h2> :
-                error ? <h2>{error}</h2> :
-                    <Table>
-                        <thead>
-                            <tr>
-                                <th>회원번호</th>
-                                <th>회원 아이디</th>
-                                {/* <th>비밀번호</th> */}
-                                <th>ROLE</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {data && data.length > 0 ? data.map(d => (
-                                <tr key={d.id}>
-                                    <td><Link to={sessionNow && sessionNow.isLoggedIn
-                                                    ? ((sessionNow.username === d.username) 
-                                                            ? `/one/${d.id}`
-                                                            : '/list') 
-                                                    : "/login"}
-                                        >{d.id}</Link></td>
-                                    <td>{d.username}</td>
-                                    {/* <td>{d.password}</td> */}
-                                    <td>{d.role}</td>
-                                </tr>
-                            )) : (
-                                <tr><td colSpan={4}>데이터가 없습니다.</td></tr>
-                            )}
-                        </tbody>
-                    </Table>}
-            <DivPage>
-                {Object.values(pageNumbers).length > 0 && pageNumbers} ({pageNumber + 1} / {totalPage})</DivPage>
-        </ListBox>
-    </StyleBlock >)
-}
+  const pageNumbers = [];
+  for (let i = 0; i < totalPage; i++) {
+    pageNumbers.push(
+      <span key={i} onClick={() => dispatch(onClick({ value: i }))}>
+        {i + 1}
+      </span>
+    );
+  }
+
+  return (
+    <div className="list-wrapper">
+      <div className="list-card">
+        <div className="list-title">회원목록</div>
+
+        {loading ? (
+          <h2 className="loading-text">Loading...</h2>
+        ) : error ? (
+          <h2 className="error-text">{error}</h2>
+        ) : (
+          <>
+            <table className="list-table">
+              <thead>
+                <tr>
+                  <th>회원번호</th>
+                  <th>회원 아이디</th>
+                  <th>ROLE</th>
+                </tr>
+              </thead>
+              <tbody>
+                {data && data.length > 0 ? (
+                  data.map((d) => {
+                    const linkPath =
+                      sessionNow && sessionNow.isLoggedIn
+                        ? sessionNow.username === d.username
+                          ? `/list/one/${d.id}`
+                          : "/list"
+                        : "/login";
+                    return (
+                      <tr key={d.id} onClick={() => nav(`${linkPath}`)}>
+                        <td>{d.id}</td>
+                        <td>{d.username}</td>
+                        <td>{d.role}</td>
+                      </tr>
+                    );
+                  })
+                ) : (
+                  <tr>
+                    <td colSpan={3}>데이터가 없습니다.</td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+
+            <div className="pagination">
+              {pageNumbers} ({pageNumber + 1} / {totalPage})
+            </div>
+          </>
+        )}
+      </div>
+    </div>
+  );
+};
+
 export default ListCom;
