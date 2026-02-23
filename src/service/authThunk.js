@@ -20,8 +20,8 @@ export const postThunk = createAsyncThunk(
 
 export const postOneThunk = createAsyncThunk(   
     "postOneThunk",
-    async (id) => {
-        const postOneRes = await fetch(`${service_path}/posts/${id}`);
+    async ({id, username}) => {
+        const postOneRes = await fetch(`${service_path}/posts/${id}?username=${username}`);
         if (postOneRes.ok) {
             const res = await postOneRes.json();
             return { data: res, message: null };

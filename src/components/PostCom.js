@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import "./css/PostCom.css";
 
 const PostCom = ({ posts, pageNumber, totalPage, loading, error }) => {
+  const sessionNow = JSON.parse(sessionStorage.getItem("auth"));
   const dispatch = useDispatch();
   const nav = useNavigate();
 
@@ -27,7 +28,10 @@ const PostCom = ({ posts, pageNumber, totalPage, loading, error }) => {
         <div className="post-add-area">
           <button
             className="post-add-btn"
-            onClick={() => nav("/post/add")}
+            onClick={() => {
+              sessionNow?.isLoggedIn ?
+                nav("/post/add") : nav("/login")
+            }}
           >
             게시글 등록
           </button>
@@ -40,6 +44,7 @@ const PostCom = ({ posts, pageNumber, totalPage, loading, error }) => {
               <th>작성자</th>
               <th>작성일</th>
               <th>수정일</th>
+              <th>조회수</th>
             </tr>
           </thead>
           <tbody>
@@ -56,12 +61,17 @@ const PostCom = ({ posts, pageNumber, totalPage, loading, error }) => {
                 <tr
                   key={post.id}
                   className="post-row"
-                  onClick={() => nav(`/post/one/${post.id}`)}
+                  onClick={() => {
+                    sessionNow?.isLoggedIn ?
+                      nav(`/post/one/${post.id}`) : nav("/login")
+                  }
+                  }
                 >
                   <td className="post-title-cell">{post.title}</td>
                   <td>{post.memUserName}</td>
                   <td>{new Date(post.createdAt).toLocaleDateString()}</td>
                   <td>{new Date(post.updateTime).toLocaleDateString()}</td>
+                  <td>{post.postCount}</td>
                 </tr>
               ))
             )}

@@ -31,12 +31,14 @@ const postSlice = createSlice({
         builder
             .addCase(postThunk.fulfilled, (state, action) => {
                 state.posts = action.payload.data;
+                console.log("postThunk fulfilled:", action.payload.data);
                 state.loading = false;
                 state.result = 0;
                 state.error = null;
             })
             .addCase(postOneThunk.fulfilled, (state, action) => {
                 state.post = action.payload.data;
+                console.log("postOneThunk fulfilled:", action.payload.data);
                 state.loading = false;
                 state.result = 0;
                 state.error = null;

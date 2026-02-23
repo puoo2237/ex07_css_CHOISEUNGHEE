@@ -14,6 +14,7 @@ const PostOneCom = ({ post, loading, error, onDelete, toUpdate }) => {
             <span><b>작성자</b> {post.memUserName}</span>
             <span><b>작성일</b> {post.createdAt?.split("T")[0]}</span>
             <span><b>수정일</b> {post.updateTime?.split("T")[0]}</span>
+            <span><b>조회수</b> {post.postCount}</span>
           </div>
         </div>
 

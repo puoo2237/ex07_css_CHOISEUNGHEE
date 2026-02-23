@@ -19,8 +19,8 @@ const PostOneCon = () => {
 
     const path = service_path;
     useEffect(() => {
-        dispatch(postOneThunk(params.id));
-    }, [params])
+        dispatch(postOneThunk({id: params.id, username: login.username}));
+    }, [params.id])
 
 
     const onDelete = async (e) => {
