@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router-dom";
-import { onClick } from "../redux/memberDataSlice";
+import { onClick } from "../../redux/memberDataSlice";
 import { useDispatch } from "react-redux";
-import "./css/PostCom.css";
+import "../css/post/PostCom.css";
 
-const PostCom = ({ posts, pageNumber, totalPage, loading, error }) => {
+const PostCom = ({ onLike, posts, pageNumber, totalPage, loading, error }) => {
   const sessionNow = JSON.parse(sessionStorage.getItem("auth"));
   const dispatch = useDispatch();
   const nav = useNavigate();
@@ -45,6 +45,8 @@ const PostCom = ({ posts, pageNumber, totalPage, loading, error }) => {
               <th>작성일</th>
               <th>수정일</th>
               <th>조회수</th>
+              <th>좋아요</th>
+              <th>좋아요수</th>
             </tr>
           </thead>
           <tbody>
@@ -61,29 +63,30 @@ const PostCom = ({ posts, pageNumber, totalPage, loading, error }) => {
                 <tr
                   key={post.id}
                   className="post-row"
-                  onClick={() => {
+                >
+                  <td onClick={() => {
                     sessionNow?.isLoggedIn ?
                       nav(`/post/one/${post.id}`) : nav("/login")
                   }
-                  }
-                >
-                  <td className="post-title-cell">{post.title}</td>
+                  } className="post-title-cell">{post.title}</td>
                   <td>{post.memUserName}</td>
                   <td>{new Date(post.createdAt).toLocaleDateString()}</td>
                   <td>{new Date(post.updateTime).toLocaleDateString()}</td>
                   <td>{post.postCount}</td>
+                  <td onClick={() => onLike({ id: post.id, liked: post.liked })}>{post.liked ? "💙" : "🤍"}</td>
+                  <td>{post.likeCount}</td>
                 </tr>
-              ))
+          ))
             )}
-          </tbody>
-        </table>
+        </tbody>
+      </table>
 
-        <div className="pagination">
-          {pageNumbers} ({pageNumber + 1} / {totalPage})
-        </div>
-
+      <div className="pagination">
+        {pageNumbers} ({pageNumber + 1} / {totalPage})
       </div>
+
     </div>
+    </div >
   );
 };
 

@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
-import PostAddCom from "../components/PostAddCom";
+import PostAddCom from "../../components/post/PostAddCom";
 import { useLocation, useNavigate } from "react-router-dom";
-import { changeInput, resetInput } from "../redux/inputSlice";
-import { uploadPostThunk } from "../service/authThunk";
+import { changeInput, resetInput } from "../../redux/inputSlice";
+import { uploadPostThunk } from "../../service/post/postThunk";
 import { useEffect } from "react";
-import { trackPage } from "../redux/pathSlice";
+import { trackPage } from "../../redux/path/pathSlice";
 
 const PostAddCon = () => {
     const dispatch = useDispatch();

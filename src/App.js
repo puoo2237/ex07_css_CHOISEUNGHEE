@@ -8,11 +8,11 @@ import ListCon from './containers/ListCon';
 import ListOneCon from './containers/ListOneCon';
 import UpdateCon from './containers/UpdateCon';
 import AdminCon from './containers/AdminCon';
-import PostCon from './containers/PostCon';
-import PostOneCon from './containers/PostOneCon';
-import PostUpdateCon from './containers/PostUpdateCon';
+import PostCon from './containers/post/PostCon';
+import PostOneCon from './containers/post/PostOneCon';
+import PostUpdateCon from './containers/post/PostUpdateCon';
+import PostAddCon from './containers/post/PostAddCon';
 import HeaderCom from './components/common/HeaderCom';
-import PostAddCon from './containers/PostAddCon';
 
 
 function App() {

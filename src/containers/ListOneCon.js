@@ -4,7 +4,7 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { deleteOneThunk, listOneThunk } from "../service/authThunk";
 import ListOneCom from "../components/ListOneCom";
 import { service_path } from "../service/service_ip_port";
-import { trackPage } from "../redux/pathSlice";
+import { trackPage } from "../redux/path/pathSlice";
 
 const ListOneCon = () => {
     const { login } = useSelector(state => state.auth)

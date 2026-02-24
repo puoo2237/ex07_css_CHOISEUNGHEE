@@ -1,4 +1,4 @@
-import "./css/PostOneCom.css";
+import "../css/post/PostOneCom.css";
 
 const PostOneCom = ({ post, loading, error, onDelete, toUpdate }) => {
   if (loading) return <div className="post-wrapper"><h2>Loading...</h2></div>;
@@ -15,6 +15,7 @@ const PostOneCom = ({ post, loading, error, onDelete, toUpdate }) => {
             <span><b>작성일</b> {post.createdAt?.split("T")[0]}</span>
             <span><b>수정일</b> {post.updateTime?.split("T")[0]}</span>
             <span><b>조회수</b> {post.postCount}</span>
+            <span><b>좋아요수</b> {post.likeCount}</span>
           </div>
         </div>
 

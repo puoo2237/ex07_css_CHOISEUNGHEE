@@ -5,7 +5,7 @@ import { listOneThunk, updateOneThunk } from "../service/authThunk";
 import { changeInfo } from "../redux/memberDataSlice";
 import { useEffect, useState } from "react";
 import { service_path } from "../service/service_ip_port";
-import { trackPage } from "../redux/pathSlice";
+import { trackPage } from "../redux/path/pathSlice";
 
 const UpdateCon = () => {
     const dispatch = useDispatch();

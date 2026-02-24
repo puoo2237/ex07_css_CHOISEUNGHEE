@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { onClick } from "../redux/memberDataSlice";
 import { useDispatch } from "react-redux";
 import "./css/AdminCom.css";

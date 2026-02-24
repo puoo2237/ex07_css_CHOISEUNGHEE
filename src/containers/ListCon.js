@@ -2,9 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ListCom from "../components/ListCom";
 import { listThunk } from "../service/authThunk";
 import { useEffect } from "react";
-import HeaderCom from "../components/common/HeaderCom";
-import { onClick } from "../redux/memberDataSlice";
-import { trackPage } from "../redux/pathSlice";
+import { trackPage } from "../redux/path/pathSlice";
 import { useLocation } from "react-router-dom";
 
 const ListCon = () => {

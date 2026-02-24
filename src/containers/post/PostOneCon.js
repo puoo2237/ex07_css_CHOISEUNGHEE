@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from "react-redux"
-import PostOneCom from "../components/PostOneCom"
+import PostOneCom from "../../components/post/PostOneCom"
 import { useLocation, useNavigate, useParams } from "react-router-dom"
-import { service_path } from "../service/service_ip_port"
+import { service_path } from "../../service/service_ip_port"
 import { useEffect } from "react"
-import { deletePostThunk, postOneThunk } from "../service/authThunk"
-import { trackPage } from "../redux/pathSlice"
+import { deletePostThunk, likePostThunk, postOneThunk } from "../../service/post/postThunk"
+import { trackPage } from "../../redux/path/pathSlice"
 
 const PostOneCon = () => {
     const { login } = useSelector(state => state.auth)
@@ -19,9 +19,8 @@ const PostOneCon = () => {
 
     const path = service_path;
     useEffect(() => {
-        dispatch(postOneThunk({id: params.id, username: login.username}));
+        dispatch(postOneThunk({id: params.id, token: login.token}));
     }, [params.id])
-
 
     const onDelete = async (e) => {
         try {

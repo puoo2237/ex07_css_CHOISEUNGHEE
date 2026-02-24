@@ -5,7 +5,7 @@ import { loginThunk } from "../service/authThunk";
 import { useLocation, useNavigate } from "react-router-dom";
 import { onLogin } from "../redux/authSlice";
 import { useEffect } from "react";
-import { trackPage } from "../redux/pathSlice";
+import { trackPage } from "../redux/path/pathSlice";
 
 const LoginCon = () => {
     const dispatch = useDispatch();

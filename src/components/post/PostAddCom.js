@@ -1,4 +1,4 @@
-import "./css/PostAddCom.css";
+import "../css/post/PostAddCom.css";
 
 const PostAddCom = ({ post, onChange, onClick }) => {
   return (

@@ -2,8 +2,8 @@ import { configureStore } from '@reduxjs/toolkit';
 import inputSlice from './inputSlice';
 import authSlice from './authSlice';
 import memberDataSlice from './memberDataSlice';
-import postSlice from './postSlice';
-import pathSlice from './pathSlice';
+import postSlice from './post/postSlice';
+import pathSlice from './path/pathSlice';
 
 const store = configureStore({
     reducer: {

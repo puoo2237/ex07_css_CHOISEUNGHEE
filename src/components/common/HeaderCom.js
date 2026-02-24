@@ -3,7 +3,7 @@ import { Link, Outlet, useNavigate } from "react-router-dom";
 import { onLogout } from "../../redux/authSlice";
 import { useEffect } from "react";
 import "../css/HeaderCom.css";
-import { clearHistory } from "../../redux/pathSlice";
+import { clearHistory } from "../../redux/path/pathSlice";
 
 const HeaderCom = () => {
     const dispatch = useDispatch();

@@ -4,7 +4,7 @@ import { changeInput, resetInput } from "../redux/inputSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { registerThunk } from "../service/authThunk";
 import { useEffect } from "react";
-import { trackPage } from "../redux/pathSlice";
+import { trackPage } from "../redux/path/pathSlice";
 
 const RegCon = () => {
     const dispatch = useDispatch();

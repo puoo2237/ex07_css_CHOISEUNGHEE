@@ -3,7 +3,7 @@ import { listThunk } from "../service/authThunk";
 import { useEffect } from "react";
 import AdminCom from "../components/AdminCom";
 import { useLocation } from "react-router-dom";
-import { trackPage } from "../redux/pathSlice";
+import { trackPage } from "../redux/path/pathSlice";
 
 const AdminCon = () => {
     const dispatch = useDispatch();

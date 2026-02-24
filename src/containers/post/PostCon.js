@@ -1,26 +1,33 @@
 import { useDispatch, useSelector } from "react-redux";
-import PostCom from "../components/PostCom";
-import { postThunk } from "../service/authThunk";
+import PostCom from "../../components/post/PostCom";
+import { likePostThunk, postThunk } from "../../service/post/postThunk";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { trackPage } from "../redux/pathSlice";
+import { trackPage } from "../../redux/path/pathSlice";
 
 const PostCon = () => {
     const dispatch = useDispatch();
     const { posts, loading, error } = useSelector(state => state.post)
+    const { login } = useSelector(state => state.auth)
 
     const location = useLocation(); // 현재 URL 경로
-    useEffect(()=>{
+    useEffect(() => {
         dispatch(trackPage(location.pathname));
     }, [])
 
     useEffect(() => {
-        dispatch(postThunk(posts.number));
-    }, [dispatch, posts.number]);
+        dispatch(postThunk({ page: posts.number, token: login.token }));
+    }, [dispatch]);
+
+    const onLike = (like) => {
+        dispatch(likePostThunk({ like, token: login.token }))
+    }
 
     return (
         <>
-            <PostCom posts={posts.content}
+            <PostCom
+                onLike={onLike}
+                posts={posts.content}
                 pageNumber={posts.number}
                 totalPage={posts.totalPages}
                 loading={loading} error={error} />

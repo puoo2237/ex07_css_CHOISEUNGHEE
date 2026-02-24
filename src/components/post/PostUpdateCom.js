@@ -1,4 +1,4 @@
-import "./css/PostUpdateCom.css";
+import "../css/post/PostUpdateCom.css";
 
 const PostUpdateCom = ({ post, onChange, onUpdate }) => {
   if (!post) return null;

@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom";
 import IndexCom from "../components/IndexCom"
-import { trackPage } from "../redux/pathSlice";
+import { trackPage } from "../redux/path/pathSlice";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 
